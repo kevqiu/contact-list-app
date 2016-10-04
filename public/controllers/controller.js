@@ -1,7 +1,8 @@
 var myApp = angular.module("myApp", []);
 
 myApp.controller("myApp", ["$scope", "$http", function($scope, $http) {
-	console.log("Hello world from controller");
+	
+	$scope.editing = false;
 	
 	var refresh = function() {
 		$http.get("/contactlist").success(function(response) {
@@ -23,6 +24,7 @@ myApp.controller("myApp", ["$scope", "$http", function($scope, $http) {
 	
 	$scope.remove = function(id) {
 		console.log(id);
+		$scope.editing = false;
 		$http.delete("/contactlist/" + id).success(function(response) {
 			refresh();
 		});
@@ -30,6 +32,7 @@ myApp.controller("myApp", ["$scope", "$http", function($scope, $http) {
 	
 	$scope.edit = function(id) {
 		console.log(id);
+		$scope.editing = true;
 		$http.get("/contactlist/" + id).success(function(response) {
 			$scope.contact = response;
 		});
@@ -37,12 +40,14 @@ myApp.controller("myApp", ["$scope", "$http", function($scope, $http) {
 	
 	$scope.update = function() {
 		console.log($scope.contact._id);
+		$scope.editing = false;
 		$http.put("/contactlist/" + $scope.contact._id, $scope.contact).success(function(response) {
 			refresh();
 		});
 	};
 	
 	$scope.deselect = function() {
+		$scope.editing = false;
 		$scope.contact = "";
 	}
 }]);

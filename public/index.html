@@ -14,9 +14,8 @@
 </head>
 <body> 
 	<div class="container" ng-controller="myApp">
-		<h1>Contact List App</h1>
-		<p">XD</p>
-		
+		<h1 style="text-align:center">Contact List App</h1>
+		<!--button class="'editing' ? 'btn btn-primary' : 'btn btn-primary'">Search for a contact!</button-->
 		<table class="table">
 			<thead>
 				<tr>
@@ -32,7 +31,7 @@
 					<td><input class="form-control" ng-model="contact.name"></td>
 					<td><input class="form-control" ng-model="contact.email"></td>
 					<td><input class="form-control" ng-model="contact.number"></td>
-					<td><button class="btn btn-primary" ng-click="addContact()">Add Contact</button></td>
+					<td><button class="btn btn-primary" ng-disabled="editing" ng-click="addContact()">Add Contact</button></td>
 					<td>
 						<button class="btn btn-info" ng-click="update()">Update</button>&nbsp;
 						<button class="btn btn-info" ng-click="deselect()">Clear</button>
@@ -47,6 +46,8 @@
 				</tr>
 			</tbody>
 		</table>
+		<button class="btn btn-primary btn-block">Search for a contact!</button>
+		<input class="form-control" ng-model="search.name"></input>
 	</div>
 	
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
